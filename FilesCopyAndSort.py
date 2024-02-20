@@ -3,8 +3,10 @@ from collections import defaultdict
 from pathlib import Path
 import shutil
 
+
 class FilesSortAndCopy:
     DEFAULT_DEST = "dist"
+
     def __init__(self, src=None, dest=None) -> None:
         self.src = src
         self.dest = dest
@@ -53,7 +55,9 @@ class FilesSortAndCopy:
         if dest:
             dest_ = self._dest_validate(dest)
         else:
-            dest_ = self.__dest or self._dest_validate(src_.resolve().parent / FilesSortAndCopy.DEFAULT_DEST)
+            dest_ = self.__dest or self._dest_validate(
+                src_.resolve().parent / FilesSortAndCopy.DEFAULT_DEST
+            )
 
         print(f"Source directory: {src_}")
         print(f"Destination directory: {dest_}")
@@ -68,7 +72,9 @@ class FilesSortAndCopy:
                 fname = item.name
                 if fname.startswith("."):
                     fname = fname[1:]
-                ending = "no_ending" if not "." in fname else fname.split(".")[-1]
+                ending = (
+                    "no_ending" if not "." in fname else fname.split(".")[-1]
+                )
                 d[ending].append(item.resolve())
             elif item.is_dir():
                 self._scan_src(d, item)
@@ -87,9 +93,12 @@ class FilesSortAndCopy:
 
 
 def print_help():
-    print("""[INFO]  Usage: python task1.py <source_dir> [<destination_dir>]
+    print(
+        """[INFO]  Usage: python task1.py <source_dir> [<destination_dir>]
                     <source_dir>      - copy from, mandatory
-                    <destination_dir> - copy and sort to, optional, default is '<source_dir>/../dest'\n""")
+                    <destination_dir> - copy and sort to, optional, default is '<source_dir>/../dest'\n"""
+    )
+
 
 def main():
     argn = len(sys.argv)
@@ -109,12 +118,13 @@ def main():
     # Create an object, set src and dist (optional) and do sort_and_copy
     files_sort_and_copy = FilesSortAndCopy()
     files_sort_and_copy.src = src
-    files_sort_and_copy.dest = dest+"_set"
+    files_sort_and_copy.dest = dest + "_set"
     files_sort_and_copy()
 
     # Can be called many times for different src or/and dest
-    files_sort_and_copy(dest=dest+"_call_1")
-    files_sort_and_copy(dest=dest+"_call_2")
+    files_sort_and_copy(dest=dest + "_call_1")
+    files_sort_and_copy(dest=dest + "_call_2")
+
 
 if __name__ == "__main__":
     try:
