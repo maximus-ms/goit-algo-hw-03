@@ -66,4 +66,4 @@ koch_snowflake(n=fraction_n, l=length, funny=funny)
 window.mainloop()
 ```
 ### Additional info
- - Function koch_snowflake has an extra parameter "funny:bool=False", it will add more drawing for a snowflake.
+ - Function koch_snowflake has an extra parameter "funny:bool=False", it will add more drawing for a snowflake if enabled.
